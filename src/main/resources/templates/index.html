@@ -1,0 +1,34 @@
+<!DOCTYPE html> <!-- HTML5宣言 -->
+<html xmlns:th="http://www.thymeleaf.org"> <!-- Thymeleafを使う宣言 -->
+<head> <!-- head開始 -->
+  <meta charset="UTF-8"> <!-- 文字コード -->
+  <title>TODOlistSpringBootVer</title> <!-- タイトル -->
+</head> <!-- head終了 -->
+<body> <!-- body開始 -->
+  <h1>TODOlistSpringBootVer</h1> <!-- 見出し -->
+
+  <form th:action="@{/add}" method="post"> <!-- 追加フォーム -->
+    <input type="text" name="content" placeholder="タスクを入力"> <!-- 入力欄 -->
+    <button type="submit">追加</button> <!-- 追加ボタン -->
+  </form> <!-- フォーム終了 -->
+
+  <hr> <!-- 区切り線 -->
+
+  <ul> <!-- 一覧表示開始 -->
+    <li th:each="t : ${todoList}"> <!-- todoListを1件ずつ回す -->
+      <span th:if="${t.done}" th:text="${t.content}" style="text-decoration: line-through;"></span> <!-- 完了なら取り消し線 -->
+      <span th:if="${!t.done}" th:text="${t.content}"></span> <!-- 未完了なら普通表示 -->
+
+      <form th:action="@{/toggle}" method="post" style="display:inline;"> <!-- 完了切替フォーム -->
+        <input type="hidden" name="id" th:value="${t.id}"> <!-- idを送る -->
+        <button type="submit" th:text="${t.done} ? '未完了に戻す' : '完了'"></button> <!-- 文言を切替 -->
+      </form> <!-- フォーム終了 -->
+
+      <form th:action="@{/delete}" method="post" style="display:inline;"> <!-- 削除フォーム -->
+        <input type="hidden" name="id" th:value="${t.id}"> <!-- idを送る -->
+        <button type="submit">削除</button> <!-- 削除ボタン -->
+      </form> <!-- フォーム終了 -->
+    </li> <!-- 1件終了 -->
+  </ul> <!-- 一覧表示終了 -->
+</body> <!-- body終了 -->
+</html> <!-- HTML終了 -->
