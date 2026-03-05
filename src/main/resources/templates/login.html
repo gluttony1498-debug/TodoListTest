@@ -1,0 +1,28 @@
+<!DOCTYPE html> <!-- HTML5の文書であることを宣言 -->
+
+<html xmlns:th="http://www.thymeleaf.org"> <!-- Thymeleafテンプレートを使用するHTML -->
+
+<head> <!-- HTMLの設定部分 -->
+<meta charset="UTF-8"> <!-- 文字コードをUTF-8に設定 -->
+<title>Login</title> <!-- ブラウザタブに表示されるタイトル -->
+</head>
+
+<body> <!-- 画面に表示される部分 -->
+
+<h2>ログイン</h2> <!-- 見出し -->
+
+<form th:action="@{/login}" method="post"> <!-- /loginへPOST送信するフォーム -->
+
+ユーザー名
+<input type="text" name="username"> <!-- usernameを入力する欄 -->
+<br>
+パスワード
+<input type="password" name="password"> <!-- passwordを入力する欄 -->
+<br>
+<br>
+<button type="submit">ログイン</button> <!-- フォーム送信ボタン -->
+
+</form>
+
+</body>
+</html>

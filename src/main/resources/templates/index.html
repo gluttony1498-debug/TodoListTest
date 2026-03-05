@@ -1,12 +1,16 @@
 <!DOCTYPE html> <!-- HTML5宣言 -->
-<html xmlns:th="http://www.thymeleaf.org"> <!-- Thymeleafを使う宣言 -->
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><!-- ThymeleafとThimeleafのspring-securityを使う宣言 -->
 <head> <!-- head開始 -->
   <meta charset="UTF-8"> <!-- 文字コード -->
   <title>TODOlistSpringBootVer</title> <!-- タイトル -->
 </head> <!-- head終了 -->
 <body> <!-- body開始 -->
   <h1>TODOlistSpringBootVer</h1> <!-- 見出し -->
-
+  <div sec:authorize="isAuthenticated()">
+    ログイン中ユーザー：<span sec:authentication="name"></span><!-- ログイン中のユーザー名を表示 -->
+  </div>
+  <br>
   <form th:action="@{/add}" method="post"> <!-- 追加フォーム -->
     <input type="text" name="content" placeholder="タスクを入力"> <!-- 入力欄 -->
     <button type="submit">追加</button> <!-- 追加ボタン -->
@@ -30,5 +34,11 @@
       </form> <!-- フォーム終了 -->
     </li> <!-- 1件終了 -->
   </ul> <!-- 一覧表示終了 -->
+  
+  <hr> <!-- 区切り線 -->
+ 	 <form th:action="@{/logout}" method="post" style="display:inline;">
+     <button type="submit">ログアウト</button>
+	 </form>
+	
 </body> <!-- body終了 -->
 </html> <!-- HTML終了 -->
